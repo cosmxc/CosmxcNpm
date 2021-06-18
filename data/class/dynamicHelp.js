@@ -51,7 +51,7 @@ function dynamicHelp(client, message, input, prefix, color) {
         **Usage Syntax**: \`<> = required, [] = optional\``;
 
     const helpEmbed = new MessageEmbed()
-        .setColor("BLUE")
+        .setColor(color)
         .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
         .setDescription(info)
         .setFooter(`Commands: ${client.commands.size || 'Unknown'} | Prefix: ${prefix}`, message.author.displayAvatarURL({ dynamic: true }))
