@@ -58,7 +58,7 @@ function dynamicHelp(client, message, input, prefix, color) {
             .addFields(fields)
             .setFooter(`Bot Prefix: ${prefix}`)
             .setTimestamp()
-            .setColor(color)
+            .setColor(color.toUpperCase() || '#000000')
         return message.channel.send(embed);
     }
 
@@ -77,20 +77,22 @@ function dynamicHelp(client, message, input, prefix, color) {
         if (cmd.aliases)
             info += `**Aliases**: ${cmd.aliases.map((a) => `\`${a}\``).join(", ")}\n`;
 
+        if (cmd.examples)
+            info += `**Examples**: ${cmd.examples.map((a) => `\`${prefix + a}\``).join(", ")}\n`;
+
         if (cmd.cooldown)
             info += `**Cooldown**: \`${cmd.cooldown}\`\n`;
 
         if (cmd.example)
-            info += `**Example**: \`${cmd.example}\`\n`;
+            info += `**Example**: \`${prefix + cmd.example}\`\n`;
 
         info +=
             `**Category**: \`${cmd.category || 'No category.'}\`
             **Usage**: \`${prefix}${cmd.usage || cmd.name}\``;
 
         const helpEmbed = new MessageEmbed()
-            .setColor(color)
-            .setTitle(`${nicerString(cmd.name)} Command Info`)
-            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+            .setColor(color.toUpperCase() || '#000000')
+            .setAuthor(`${nicerString(cmd.name)} Command Info`, message.author.displayAvatarURL({ dynamic: true }))
             .setDescription(info)
             .setFooter(`Bot Prefix: ${prefix}`)
             .setTimestamp()
