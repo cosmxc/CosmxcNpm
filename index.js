@@ -1,0 +1,1 @@
+module.exports.dynamicHelp = require('./data/class/dynamicHelp');
