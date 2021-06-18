@@ -5,7 +5,7 @@ Just a simple utility package for your Discord bot.
 ## 💻 Installation
 
 ```
-npm install cosmic
+npm install cosmxc
 ```
 
 ## ⚙️ Usage
