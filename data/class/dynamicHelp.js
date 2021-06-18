@@ -56,7 +56,7 @@ function dynamicHelp(client, message, input, prefix, color) {
             .setAuthor(`${client.user?.username} Commands List`, client.user?.displayAvatarURL())
             .setDescription(`Use \`${prefix}help <command>\` to get more info on a command.`)
             .addFields(fields)
-            .setFooter(`${client.commands.size} commands`)
+            .setFooter(`Bot Prefix: ${prefix}`)
             .setTimestamp()
             .setColor(color)
         return message.channel.send(embed);
@@ -72,28 +72,28 @@ function dynamicHelp(client, message, input, prefix, color) {
             return message.channel.send(noInfo)
         }
 
-        let info = `**Command Name:** \`${cmd.name || 'No command name.'}\`\n`;
+        let info = `**Description:** \`${cmd.description || 'No description.'}\`\n`;
 
         if (cmd.aliases)
             info += `**Aliases**: ${cmd.aliases.map((a) => `\`${a}\``).join(", ")}\n`;
 
         if (cmd.cooldown)
-            info += `**Cooldown**: ${cmd.cooldown}\n`;
+            info += `**Cooldown**: \`${cmd.cooldown}\`\n`;
 
         if (cmd.example)
-            info += `**Example**: ${cmd.example}\n`;
+            info += `**Example**: \`${cmd.example}\`\n`;
 
         info +=
-            `**Description:** \`${cmd.description || 'No description.'}\`
-        **Category**: \`${cmd.category || 'No category.'}\`
-        **Usage**: \`${prefix}${cmd.usage || cmd.name}\`
-        **Usage Syntax**: \`<> = required, [] = optional\``;
+            `**Category**: \`${cmd.category || 'No category.'}\`
+            **Usage**: \`${prefix}${cmd.usage || cmd.name}\``;
 
         const helpEmbed = new MessageEmbed()
             .setColor(color)
+            .setTitle(`${nicerString(cmd.name)} Command Info`)
             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
             .setDescription(info)
-            .setFooter(`Commands: ${client.commands.size || 'Unknown'} | Prefix: ${prefix}`, message.author.displayAvatarURL({ dynamic: true }))
+            .setFooter(`Bot Prefix: ${prefix}`)
+            .setTimestamp()
         return message.channel.send(helpEmbed);
     } catch {
         const noInfo = new MessageEmbed()

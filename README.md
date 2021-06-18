@@ -10,7 +10,15 @@ npm install cosmxc
 
 ## ⚙️ Usage
 
+Edit the code depending on your parameters and command handler.
+
 ```js
 const { dynamicHelp } = require("cosmxc");
-dynamicHelp(client, message, args[0], "YOUR_BOT_PREFIX");
+
+module.exports = {
+    name: 'help',
+    execute(client, message, args) {
+        dynamicHelp(client, message, args[0], "BOT_PREFIX", "EMBED_COLOR");
+    }
+}
 ```
